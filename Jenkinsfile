@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+     stage('package') {
+     steps {
+       sh 'mvn clean package -Dmaven.test.skip=true' 
+    }
+     }
     stage('SonarQube analysis') {
     steps {
         withSonarQubeEnv(installationName:'Sonar') { // You can override the credential to be used
