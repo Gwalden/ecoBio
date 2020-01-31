@@ -1,11 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage("build & SonarQube analysis") {
-            agent any
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.projectKey=ecoBio -Dsonar.host.url=htpp://localhost:9000 -Dsonar.login=a2346971a7b31ddb31d67d3d769bb9f153c21ad4' 
-              }
-       }
+    stage('SonarQube analysis') {
+    withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { // You can override the credential to be used
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
+    }
+  }
   }
 }
