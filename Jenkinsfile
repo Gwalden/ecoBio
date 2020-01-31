@@ -6,10 +6,13 @@ pipeline {
         sh 'ls -la' 
       }
     }
-    stage('Build') {
-      steps { 
-        sh 'ls' 
-      }
-    }
-  }
+     stages {
+          stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('My SonarQube Server') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+       }
 }
