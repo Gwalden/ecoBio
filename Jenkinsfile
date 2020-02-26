@@ -53,7 +53,7 @@ pipeline {
       }
       stage('Build') {
           steps {
-              sh 'mvn clean package'
+              bat 'mvn clean package'
           }
       }
       
@@ -64,7 +64,7 @@ pipeline {
       stage('Push SNAPSHOT to Nexus') {
           when { expression { isSnapshot } }
           steps {
-              sh "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapshot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
+              bat "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapshot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
 
           }
       }
