@@ -29,7 +29,7 @@ pipeline {
    stages {
       stage('Checkout') {
          steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/fhoubart/demo-cicd.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Gwalden/ecoBio.git']]])
          }
       }
       stage('Get info from POM') {
