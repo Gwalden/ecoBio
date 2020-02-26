@@ -39,6 +39,11 @@
         </dependency>
 	 	
 	</dependencies>
-
+	<repositories>
+		<repository>
+			<id>maven-snapshots</id>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</repository>
+	</repositories>
 
 </project>
