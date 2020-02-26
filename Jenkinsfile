@@ -92,7 +92,7 @@ pipeline {
    }
     post {
             always {
-                junit '*/surefire-reports/.xml'
+                junit '**/target/surefire-reports/.xml'
                 recordIssues enabledForFailure: true, tools: [mavenConsole(),java(),javaDoc()]
                 recordIssues enabledForFailure: true, tool: checkStyle()
                 recordIssues enabledForFailure: true, tool: spotBugs()
