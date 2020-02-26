@@ -11,13 +11,7 @@
 		<junit.jupiter.version>5.6.0</junit.jupiter.version>
         <junit.platform.version>1.6.0</junit.platform.version>
 	</properties>
-<distributionManagement>
-			<snapshotRepository>
-			   <id>nexus</id>
-			   <url>http://localhost:8081/repository/maven-snapshots</url>
-			</snapshotRepository>
-		
-		 </distributionManagement>
+
 	<dependencies>
 	
 		<dependency>
@@ -44,13 +38,14 @@
             <scope>test</scope>
         </dependency>
 	 	
-		<dependency>
-			<groupId>com.github.spotbugs</groupId>
-			<artifactId>spotbugs-maven-plugin</artifactId>
-			<version>4.0.0-SNAPSHOT</version>
-			<type>maven-plugin</type>
-		</dependency>
+		 	  <dependency>
+						<groupId>com.github.spotbugs</groupId>
+						<artifactId>spotbugs</artifactId>
+						<version>4.0.0-beta4</version>
+					  </dependency>
+				
 		
+	
 	<dependency>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-checkstyle-plugin</artifactId>
@@ -65,6 +60,12 @@
 	  <type>maven-plugin</type>
 	</dependency>
 	</dependencies>
-
+	<repositories>
+		<repository>
+			<id>nexusLocal</id>
+			<url>http://localhost:8081/repository/maven-public/</url>
+		</repository>
+		
+	</repositories>
 
 </project>
