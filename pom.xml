@@ -11,7 +11,13 @@
 		<junit.jupiter.version>5.6.0</junit.jupiter.version>
         <junit.platform.version>1.6.0</junit.platform.version>
 	</properties>
-
+<distributionManagement>
+			<snapshotRepository>
+			   <id>nexus</id>
+			   <url>http://localhost:8081/repository/maven-snapshots</url>
+			</snapshotRepository>
+		
+		 </distributionManagement>
 	<dependencies>
 	
 		<dependency>
@@ -45,25 +51,20 @@
 			<type>maven-plugin</type>
 		</dependency>
 		
-		<dependency>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-checkstyle-plugin</artifactId>
-  <version>3.1.1</version>
-  <type>maven-plugin</type>
-</dependency>
+	<dependency>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-checkstyle-plugin</artifactId>
+		<version>3.1.1</version>
+		<type>maven-plugin</type>
+	</dependency>
 
-<dependency>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-pmd-plugin</artifactId>
-  <version>3.13.0</version>
-  <type>maven-plugin</type>
-</dependency>
+	<dependency>
+	  <groupId>org.apache.maven.plugins</groupId>
+	  <artifactId>maven-pmd-plugin</artifactId>
+	  <version>3.13.0</version>
+	  <type>maven-plugin</type>
+	</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>nexusLocal</id>
-			<url>http://localhost:8081/repository/maven-snapshots/</url>
-		</repository>
-	</repositories>
+
 
 </project>
