@@ -57,6 +57,16 @@ pipeline {
           }
       }
       
+       stage('tests') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+                 sh "mvn pmd:pmd"
+                 sh "mvn pmd:cpd"
+
+			            }
+        }
+      
       /*
       Ce stage ne se lance que si isSnapshot est vrai
       Comme on pousse un Snapshot, on utilise le plugin deploy:deploy-file, cela permet de ne pas mettre les paramètres du Repo dans le pom.xml
@@ -80,4 +90,14 @@ pipeline {
           }
       }
    }
+    post {
+            always {
+                junit '*/surefire-reports/.xml'
+                recordIssues enabledForFailure: true, tools: [mavenConsole(),java(),javaDoc()]
+                recordIssues enabledForFailure: true, tool: checkStyle()
+                recordIssues enabledForFailure: true, tool: spotBugs()
+                recordIssues enabledForFailure: true, tool: cpd(pattern:'**/target/cpd.xml')
+                recordIssues enabledForFailure: true, tool: pmdParser(pattern:'**/target/pmd.xml')
+            }
+        }
 }
