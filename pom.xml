@@ -38,6 +38,26 @@
             <scope>test</scope>
         </dependency>
 	 	
+		<dependency>
+			<groupId>com.github.spotbugs</groupId>
+			<artifactId>spotbugs-maven-plugin</artifactId>
+			<version>4.0.0-SNAPSHOT</version>
+			<type>maven-plugin</type>
+		</dependency>
+		
+		<dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-checkstyle-plugin</artifactId>
+  <version>3.1.1</version>
+  <type>maven-plugin</type>
+</dependency>
+
+<dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-pmd-plugin</artifactId>
+  <version>3.13.0</version>
+  <type>maven-plugin</type>
+</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
