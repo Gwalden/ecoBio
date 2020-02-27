@@ -19,9 +19,11 @@ class CalculatorTests {
         assertEquals(0, calc.soustract(1,1), "The output should be the sum of the two arguments");
     }
     
+
+    
     @Test
-    void failSoustractionTest() {
+    void multTest() {
         Calculator calc = new Calculator();
-        assertEquals(5, calc.soustract(1,1), "The output should be the sum of the two arguments");
+        assertEquals(6, calc.multi(3,2), "The output should be the sum of the two arguments");
     }
 }
