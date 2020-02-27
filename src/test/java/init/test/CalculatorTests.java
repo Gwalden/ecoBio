@@ -12,4 +12,16 @@ class CalculatorTests {
         Calculator calc = new Calculator();
         assertEquals(2, calc.add(1,1), "The output should be the sum of the two arguments");
     }
+    
+    @Test
+    void soustractionTest() {
+        Calculator calc = new Calculator();
+        assertEquals(0, calc.soustract(1,1), "The output should be the sum of the two arguments");
+    }
+    
+    @Test
+    void failSoustractionTest() {
+        Calculator calc = new Calculator();
+        assertEquals(5, calc.soustract(1,1), "The output should be the sum of the two arguments");
+    }
 }
