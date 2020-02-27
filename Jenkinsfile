@@ -53,16 +53,16 @@ pipeline {
       }
       stage('Build') {
           steps {
-              bat 'mvn clean package'
+              sh 'mvn clean package'
           }
       }
       
        stage('tests') {
             steps {
-				 bat "mvn checkstyle:checkstyle"
-                 bat "mvn spotbugs:spotbugs"
-                 bat "mvn pmd:pmd"
-                 bat "mvn pmd:cpd"
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+                 sh "mvn pmd:pmd"
+                 sh "mvn pmd:cpd"
 
 			            }
         }
@@ -74,7 +74,7 @@ pipeline {
       stage('Push SNAPSHOT to Nexus') {
           when { expression { isSnapshot } }
           steps {
-              bat "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapshot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
+              sh "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapshot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
 
           }
       }
@@ -92,7 +92,7 @@ pipeline {
    }
     post {
             always {
-                junit '**/surefire-reports/*.xml'
+                junit '*/surefire-reports/.xml'
                 recordIssues enabledForFailure: true, tools: [mavenConsole(),java(),javaDoc()]
                 recordIssues enabledForFailure: true, tool: checkStyle()
                 recordIssues enabledForFailure: true, tool: spotBugs()
