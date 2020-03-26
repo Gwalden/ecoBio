@@ -149,7 +149,16 @@
 			<id>nexusLocal</id>
 			<url>http://localhost:8081/repository/maven-public/</url>
 		</repository>
-		
+		<repository>
+  <id>EpsiBalek</id>
+  <url>https://pkgs.dev.azure.com/EpsiBalek/_packaging/EpsiBalek/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
 	</repositories>
 
 </project>
