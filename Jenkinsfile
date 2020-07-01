@@ -75,7 +75,7 @@ pipeline {
 
 			            }
         }
-	       stage('Accès au site') {
+	       stage('Acces au site') {
             steps {
 				 bat "mvn checkstyle:checkstyle"
                  bat "mvn spotbugs:spotbugs"
@@ -120,7 +120,7 @@ pipeline {
         }
 	   
 	   
-	   	       stage('Accès ancienne données') {
+	   	       stage('Acces ancienne donnees') {
             steps {
 				 bat "mvn checkstyle:checkstyle"
  
