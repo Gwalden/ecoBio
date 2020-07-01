@@ -67,6 +67,66 @@ pipeline {
 			            }
         }
       
+	    stage('tests Non Regression') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+
+
+			            }
+        }
+	       stage('Accès au site') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+    
+
+			            }
+        }
+	       stage('Upload fichier') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+    
+
+			            }
+        }
+	       stage('Csv Valide') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+        
+
+			            }
+        }
+	   
+	   	       stage('Fichier Conforme') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+          
+
+			            }
+        }
+	   
+	   
+	   	       stage('Fichier non Conforme') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+                 sh "mvn spotbugs:spotbugs"
+       
+
+			            }
+        }
+	   
+	   
+	   	       stage('Accès ancienne données') {
+            steps {
+				 sh "mvn checkstyle:checkstyle"
+ 
+
+			            }
+        }
       /*
       Ce stage ne se lance que si isSnapshot est vrai
       Comme on pousse un Snapshot, on utilise le plugin deploy:deploy-file, cela permet de ne pas mettre les paramètres du Repo dans le pom.xml
