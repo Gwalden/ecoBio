@@ -122,7 +122,7 @@ pipeline {
 	   
 	   	       stage('Accès ancienne données') {
             steps {
-				 bat "mvn checkstyle:checkstyle"²
+				 bat "mvn checkstyle:checkstyle"
  
 
 			            }
