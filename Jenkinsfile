@@ -8,7 +8,7 @@ def nexusUrl = 'http://localhost:8081'
 def mavenRepoId = 'nexusLocal'
 
 /* *** Repositories Nexus *** */
-def nexusRepoSnapshot = "maven-snapshots"
+def nexusRepoSnapbatot = "maven-snapbatots"
 def nexusRepoRelease = "maven-releases"
 
 
@@ -20,8 +20,8 @@ def filePath = ''
 def packaging = ''
 def version = ''
 
-// Variable utilisée pour savoir si c'est une RELEASE ou une SNAPSHOT
-def isSnapshot = true
+// Variable utilisée pour savoir si c'est une RELEASE ou une SNAPbatOT
+def isSnapbatot = true
 
 pipeline {
    agent any
@@ -41,60 +41,60 @@ pipeline {
                 packaging = pom.packaging
                 version = pom.version
                 filepath = "target/${artifactId}-${version}.jar"
-                isSnapshot = version.endsWith("-SNAPSHOT")
+                isSnapbatot = version.endsWith("-SNAPbatOT")
             }
             echo groupId
             echo artifactId
             echo packaging
             echo version
             echo filepath
-            echo "isSnapshot: ${isSnapshot}"
+            echo "isSnapbatot: ${isSnapbatot}"
           }
       }
       stage('Build') {
           steps {
-              sh 'mvn clean package'
+              bat 'mvn clean package'
           }
       }
       
        stage('tests') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
-                 sh "mvn pmd:pmd"
-                 sh "mvn pmd:cpd"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
+                 bat "mvn pmd:pmd"
+                 bat "mvn pmd:cpd"
 
 			            }
         }
       
 	    stage('tests Non Regression') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
 
 
 			            }
         }
 	       stage('Accès au site') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
     
 
 			            }
         }
 	       stage('Upload fichier') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
     
 
 			            }
         }
 	       stage('Csv Valide') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
         
 
 			            }
@@ -102,8 +102,8 @@ pipeline {
 	   
 	   	       stage('Fichier Conforme') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
           
 
 			            }
@@ -112,8 +112,8 @@ pipeline {
 	   
 	   	       stage('Fichier non Conforme') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
-                 sh "mvn spotbugs:spotbugs"
+				 bat "mvn checkstyle:checkstyle"
+                 bat "mvn spotbugs:spotbugs"
        
 
 			            }
@@ -122,31 +122,31 @@ pipeline {
 	   
 	   	       stage('Accès ancienne données') {
             steps {
-				 sh "mvn checkstyle:checkstyle"
+				 bat "mvn checkstyle:checkstyle"²
  
 
 			            }
         }
       /*
-      Ce stage ne se lance que si isSnapshot est vrai
-      Comme on pousse un Snapshot, on utilise le plugin deploy:deploy-file, cela permet de ne pas mettre les paramètres du Repo dans le pom.xml
+      Ce stage ne se lance que si isSnapbatot est vrai
+      Comme on pousse un Snapbatot, on utilise le plugin deploy:deploy-file, cela permet de ne pas mettre les paramètres du Repo dans le pom.xml
       */
-      stage('Push SNAPSHOT to Nexus') {
-          when { expression { isSnapshot } }
+      stage('Pubat SNAPbatOT to Nexus') {
+          when { expression { isSnapbatot } }
           steps {
-              sh "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapshot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
+              bat "mvn deploy:deploy-file -e -DgroupId=${groupId} -Dversion=${version} -Dpackaging=${packaging} -Durl=${nexusUrl}/repository/${nexusRepoSnapbatot} -Dfile=${filepath} -DartifactId=${artifactId} -DrepositoryId=${mavenRepoId}"
 
           }
       }
      
      /*
-     Ce stage ne se lance que si isSnapshot est faux
+     Ce stage ne se lance que si isSnapbatot est faux
      On pousse la release via le plugin Nexus
      */
-      stage('Push RELEASE to Nexus') {
-          when { expression { !isSnapshot } }
+      stage('Pubat RELEASE to Nexus') {
+          when { expression { !isSnapbatot } }
           steps {
-            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: "${nexusRepoRelease}", packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
+            nexusPublibater nexusInstanceId: 'nexus_localhost', nexusRepositoryId: "${nexusRepoRelease}", packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
           }
       }
    }
